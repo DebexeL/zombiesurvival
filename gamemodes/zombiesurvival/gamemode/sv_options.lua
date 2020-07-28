@@ -40,7 +40,7 @@ cvars.AddChangeCallback("zs_babymode", function(cvar, oldvalue, newvalue)
 	GAMEMODE:SetBabyMode(tonumber(newvalue) == 1)
 end)
 
-GM.EndWaveHealthBonus = CreateConVar("zs_endwavehealthbonus", "0", FCVAR_ARCHIVE + FCVAR_NOTIFY, "Humans will get this much health after every wave. 0 to disable."):GetInt()
+GM.EndWaveHealthBonus = CreateConVar("zs_endwavehealthbonus", "2", FCVAR_ARCHIVE + FCVAR_NOTIFY, "Humans will get this much health after every wave. 0 to disable."):GetInt()
 cvars.AddChangeCallback("zs_endwavehealthbonus", function(cvar, oldvalue, newvalue)
 	GAMEMODE.EndWaveHealthBonus = tonumber(newvalue) or 0
 end)

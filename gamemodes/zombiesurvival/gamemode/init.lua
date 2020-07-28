@@ -2006,6 +2006,36 @@ function GM:PlayerReadyRound(pl)
 	if self.OverrideStartingWorth then
 		pl:SendLua("GAMEMODE.StartingWorth="..tostring(self.StartingWorth))
 	end
+	
+	--[[
+	
+	for i, v in ipairs( player.GetAll() ) do
+		print( Player.GetAll[ math.random( #myTable ) ] )
+	end
+	
+	if player.GetCount() > 1 then
+		local randomply = table.Random(player.GetAll())
+		PrintMessage(3, "Works? Should output a random player? " ..randomply)
+	end
+	]]--
+
+	
+--[[
+	if player.GetCount() > 1 then
+		local PlayersList = player.GetHumans() -- Yes we can use 1 because lua doesn't start from 0 like traditional C#
+		print("I think the best Gay ever is " .. tostring(PlayersList[math.random(1, #PlayersList)]) .. ".")
+	end
+	]]--
+	 
+	 --[[
+	if player.GetCount() > 1 then
+		local rply = math.random(1, #player.GetHumans()) -- Yes we can use 1 because lua doesn't start from 0 like traditional C#
+		local chosen = player.GetHumans()[rply]
+		--for i, v in ipairs( #player.GetHumans() ) do
+		--	player.GetHumans()[i]:
+			PrintMessage(3, "Works? Should output a random player? " ..tostring(chosen))
+		--end
+	end ]]--
 
 	if pl:Team() == TEAM_UNDEAD then
 		-- This is just so they get updated on what class they are and have their hulls set up right.
@@ -4141,6 +4171,34 @@ function GM:WaveStateChanged(newstate)
 					end
 				end
 			end
+			
+			-- SPAWN PORTALGUN IF MORE THATN 6 PLAYERS AND IT DOES NOT EXIST YET.
+			if player.GetCount() > 6 then
+				if not self.ZombieEscape and #ents.FindByClass("weapon_portalgun") == 0 then
+					local have = false
+					for _, pl in pairs(humans) do
+						if pl:HasWeapon("weapon_portalgun") then
+							have = true
+							break
+						end
+					end
+
+					if not have and #humans >= 1 then
+						local spawn = self:PlayerSelectSpawn(humans[math.random(#humans)])
+						if spawn and spawn:IsValid() then
+							local ent = ents.Create("weapon_portalgun")
+							if ent:IsValid() then
+								ent:SetPos(spawn:GetPos() + Vector(0, 0, 10))
+								ent:Spawn()
+								ent:DropToFloor()
+								-- ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS_TRIGGER) -- Just so no one gets stuck in it.
+								ent.NoTakeOwnership = true
+							end
+						end
+					end
+				end
+			end
+			
 		end
 
 		local prevwave = self:GetWave()

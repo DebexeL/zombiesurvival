@@ -110,7 +110,7 @@ GM.AmmoCache["sniperpenetratedround"]		= 1			-- Remote Det pack.
 GM.AmmoCache["grenade"]						= 1			-- Grenades.
 GM.AmmoCache["thumper"]						= 1			-- Gun turret.
 GM.AmmoCache["gravity"]						= 1			-- Unused.
-GM.AmmoCache["battery"]						= 23		-- Used with the Medical Kit.
+GM.AmmoCache["battery"]						= 24		-- Used with the Medical Kit.
 GM.AmmoCache["gaussenergy"]					= 2			-- Nails used with the Carpenter's Hammer.
 GM.AmmoCache["combinecannon"]				= 1			-- Not used.
 GM.AmmoCache["airboatgun"]					= 1			-- Arsenal crates.
@@ -133,6 +133,15 @@ GM.AmmoResupply = table.ToAssoc({"ar2", "pistol", "smg1", "357", "xbowbolt", "bu
 -----------
 -- Worth --
 -----------
+
+------------------
+-- CUSTOM BEGIN --
+------------------
+
+
+----------------
+-- CUSTOM END --
+----------------
 
 GM:AddStartingItem("pshtr",				ITEMCAT_GUNS,			45,				"weapon_zs_peashooter")
 GM:AddStartingItem("btlax",				ITEMCAT_GUNS,			45,				"weapon_zs_battleaxe")
@@ -293,6 +302,17 @@ GM:AddStartingItem("bloodshot",			ITEMCAT_OTHER,			35,				"weapon_zs_bloodshotbo
 ------------
 -- Points --
 ------------
+
+------------------
+-- CUSTOM BEGIN --
+------------------
+GM:AddPointShopItem("nyan",				ITEMCAT_GUNS,			30,				"weapon_nyangun")
+GM:AddPointShopItem("portalgun",		ITEMCAT_TOOLS,			150,			"weapon_portalgun")
+GM:AddPointShopItem("jihadbomb",		ITEMCAT_OTHER,			25,				"weapon_jihadbomb")
+
+----------------
+-- CUSTOM END --
+----------------
 
 -- Tier 1
 GM:AddPointShopItem("pshtr",			ITEMCAT_GUNS,			15,				"weapon_zs_peashooter", nil, nil, nil, function(pl) pl:GiveEmptyWeapon("weapon_zs_peashooter") end)
@@ -656,7 +676,7 @@ GM:AddDeployableInfo("prop_drone_hauler",		"Hauler Drone",			"weapon_zs_drone_ha
 GM:AddDeployableInfo("prop_rollermine",			"Rollermine",			"weapon_zs_rollermine")
 GM:AddDeployableInfo("prop_tv",                   	 "TV",                    	"weapon_zs_tv")
 
-GM.MaxSigils = 3
+GM.MaxSigils = 0
 
 GM.DefaultRedeem = CreateConVar("zs_redeem", "4", FCVAR_REPLICATED + FCVAR_ARCHIVE + FCVAR_NOTIFY, "The amount of kills a zombie needs to do in order to redeem. Set to 0 to disable."):GetInt()
 cvars.AddChangeCallback("zs_redeem", function(cvar, oldvalue, newvalue)
@@ -696,7 +716,7 @@ end)
 -- Static values that don't need convars...
 
 -- Initial length for wave 1.
-GM.WaveOneLength = 220
+GM.WaveOneLength = 225
 
 -- Add this many seconds for each additional wave.
 GM.TimeAddedPerWave = 15
@@ -717,10 +737,10 @@ GM.WaveIntermissionLength = 60
 GM.EndGameTime = 45
 
 -- How many clips of ammo guns from the Worth menu start with. Some guns such as shotguns and sniper rifles have multipliers on this.
-GM.SurvivalClips = 4 --2
+GM.SurvivalClips = 5 --2
 
 -- How long do humans have to wait before being able to get more ammo from a resupply box?
-GM.ResupplyBoxCooldown = 60
+GM.ResupplyBoxCooldown = 20
 
 -- Put your unoriginal, 5MB Rob Zombie and Metallica music here.
 GM.LastHumanSound = Sound("zombiesurvival/lasthuman.ogg")
@@ -746,7 +766,7 @@ GM.PointSaving = 0
 GM.LockItemTiers = false
 
 -- Don't save more than this amount of points. 0 for infinite.
-GM.PointSavingLimit = 0
+GM.PointSavingLimit = 250
 
 -- For Classic Mode
 GM.WaveIntermissionLengthClassic = 20
@@ -758,7 +778,7 @@ GM.MaxPoisonDamage = 50
 GM.MaxBleedDamage = 50
 
 -- Give humans this many points when the wave ends.
-GM.EndWavePointsBonus = 5
+GM.EndWavePointsBonus = 7
 
 -- Also give humans this many points when the wave ends, multiplied by (wave - 1)
 GM.EndWavePointsBonusPerWave = 1
